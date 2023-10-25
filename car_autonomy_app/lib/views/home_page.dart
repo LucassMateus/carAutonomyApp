@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   @override
   void initState() {
     super.initState();
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     final state = store.value;
     Widget? child;
 
-     if (state is LoadingCarState) {
+    if (state is LoadingCarState) {
       child = const Center(
         child: CircularProgressIndicator(),
       );
@@ -44,11 +43,36 @@ class _HomePageState extends State<HomePage> {
     }
 
     if (state is SucessCarState) {
-      child =  Padding(
+      child = Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             const HomeDropdownComponent(),
+            // ValueListenableBuilder(
+            //     valueListenable: controller.dropValue,
+            //     builder: (buildContext, String value, _) {
+            //       return SizedBox(
+            //         width: 250,
+            //         child: DropdownButtonFormField(
+            //           icon: const Icon(Icons.drive_eta),
+            //           isExpanded: true,
+            //           hint: const Text('Escolha o carro'),
+            //           decoration: InputDecoration(
+            //               label: const Text('Carro'),
+            //               border: OutlineInputBorder(
+            //                   borderRadius: BorderRadius.circular(6))),
+            //           value: (value.isEmpty) ? null : value,
+            //           onChanged: (value) =>
+            //               controller.dropValue.value = value.toString(),
+            //           items: cars.cars
+            //               .map((option) => DropdownMenuItem(
+            //                     value: option,
+            //                     child: Text(option.name),
+            //                   ))
+            //               .toList(),
+            //         ),
+            //       );
+            //     }),
             const SizedBox(height: 10),
             TextField(
               onChanged: (value) => controller.setDistanciaUrbana,
@@ -66,7 +90,7 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(onPressed: () {}, child: const Text('Calcular')),
             ValueListenableBuilder<String>(
                 valueListenable: controller.result,
-                builder: (context, value, child) {
+                builder: (context, value, _) {
                   return Text(value);
                 })
           ],
@@ -74,9 +98,8 @@ class _HomePageState extends State<HomePage> {
       );
     }
     return Scaffold(
-      appBar: AppBar(title: const Text('Consumo de combustível')),
-      drawer: const DrawerComponent(),
-      body: child ?? Container()
-    );
+        appBar: AppBar(title: const Text('Consumo de combustível')),
+        drawer: const DrawerComponent(),
+        body: child ?? Container());
   }
 }

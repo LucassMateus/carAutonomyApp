@@ -2,7 +2,8 @@ import 'package:car_autonomy_app/controllers/home_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../stores/car_store.dart';
+import '../models/car_model.dart';
+import '../repositories/car_repository.dart';
 
 class HomeDropdownComponent extends StatefulWidget {
   const HomeDropdownComponent({super.key});
@@ -15,16 +16,13 @@ class _HomeDropdownComponentState extends State<HomeDropdownComponent> {
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   context.read<CarStore>().fetchCars();
-    // });
   }
 
   @override
   Widget build(BuildContext context) {
+    final carsContext = context.watch<CarRepository>();
+    final List<CarModel> cars = carsContext.cars;
     final controller = HomePageController();
-    final store = context.watch<CarStore>();
-
     return ValueListenableBuilder(
         valueListenable: controller.dropValue,
         builder: (buildContext, String value, _) {
@@ -41,10 +39,10 @@ class _HomeDropdownComponentState extends State<HomeDropdownComponent> {
               value: (value.isEmpty) ? null : value,
               onChanged: (value) =>
                   controller.dropValue.value = value.toString(),
-              items: controller.dropOptions
+              items: cars
                   .map((option) => DropdownMenuItem(
-                        value: option,
-                        child: Text(option),
+                        value: option.name,
+                        child: Text(option.name),
                       ))
                   .toList(),
             ),

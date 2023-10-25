@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'repositories/car_repository.dart';
+import 'src/shared/themes/themes.dart';
 import 'stores/car_store.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,10 +16,12 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => CarRepository()),
           ChangeNotifierProvider(create: (context) => CarStore(context.read())),
         ],
-        child: const MaterialApp(
+        child: MaterialApp(
           debugShowCheckedModeBanner: false,
           themeMode: ThemeMode.light,
-          home: HomePage(),
+          theme: ligthTheme,
+          darkTheme: darkTheme,
+          home: const HomePage(),
         ));
   }
 }
