@@ -1,3 +1,4 @@
+import 'package:car_autonomy_app/services/car_service.dart';
 import 'package:car_autonomy_app/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => CarRepository()),
-          ChangeNotifierProvider(create: (context) => CarStore(context.read())),
+          ChangeNotifierProvider(create: (context) => CarService()),
+          ChangeNotifierProvider(create: (context) => CarStore()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

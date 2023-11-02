@@ -1,28 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:car_autonomy_app/controllers/home_page_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../models/car_model.dart';
-import '../repositories/car_repository.dart';
 
-class HomeDropdownComponent extends StatefulWidget {
-  const HomeDropdownComponent({super.key});
+class HomeDropdownComponent extends StatelessWidget {
+  final List<CarModel> cars;
 
-  @override
-  State<HomeDropdownComponent> createState() => _HomeDropdownComponentState();
-}
-
-class _HomeDropdownComponentState extends State<HomeDropdownComponent> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  const HomeDropdownComponent({
+    Key? key,
+    required this.cars,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final carsContext = context.watch<CarRepository>();
-    final List<CarModel> cars = carsContext.cars;
     final controller = HomePageController();
+
     return ValueListenableBuilder(
         valueListenable: controller.dropValue,
         builder: (buildContext, String value, _) {

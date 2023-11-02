@@ -1,17 +1,17 @@
-import 'package:car_autonomy_app/repositories/car_repository.dart';
+import 'package:car_autonomy_app/services/car_service.dart';
 import 'package:car_autonomy_app/states/car_state.dart';
 import 'package:flutter/widgets.dart';
 
 class CarStore extends ValueNotifier<CarState> {
-  final CarRepository repository;
+  final carService = CarService();
 
-  CarStore(this.repository) : super(InitialCarState());
+  CarStore() : super(InitialCarState());
 
-  Future fetchCars() async {
+  fetchCars() async {
     value = LoadingCarState();
     await Future.delayed(const Duration(seconds: 1));
     try {
-      final cars = await repository.fetchCars();
+      final cars = await carService.fetchCars();
       value = SucessCarState(cars);
     } catch (e) {
       ErrorCarState(e.toString());

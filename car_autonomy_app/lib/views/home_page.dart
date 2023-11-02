@@ -1,11 +1,13 @@
 import 'package:car_autonomy_app/components/drawer_component.dart';
 import 'package:car_autonomy_app/controllers/home_page_controller.dart';
+import 'package:car_autonomy_app/repositories/car_repository.dart';
 import 'package:car_autonomy_app/states/car_state.dart';
 import 'package:car_autonomy_app/stores/car_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../components/home_dropdown_component.dart';
+import '../models/car_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<CarStore>().fetchCars();
+      context.read<CarRepository>().cars;
     });
   }
 
@@ -27,7 +30,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final controller = HomePageController();
     final store = context.watch<CarStore>();
+    final repository = context.watch<CarRepository>();
     final state = store.value;
+    final List<CarModel> cars = repository.cars;
     Widget? child;
 
     if (state is LoadingCarState) {
@@ -47,32 +52,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            const HomeDropdownComponent(),
-            // ValueListenableBuilder(
-            //     valueListenable: controller.dropValue,
-            //     builder: (buildContext, String value, _) {
-            //       return SizedBox(
-            //         width: 250,
-            //         child: DropdownButtonFormField(
-            //           icon: const Icon(Icons.drive_eta),
-            //           isExpanded: true,
-            //           hint: const Text('Escolha o carro'),
-            //           decoration: InputDecoration(
-            //               label: const Text('Carro'),
-            //               border: OutlineInputBorder(
-            //                   borderRadius: BorderRadius.circular(6))),
-            //           value: (value.isEmpty) ? null : value,
-            //           onChanged: (value) =>
-            //               controller.dropValue.value = value.toString(),
-            //           items: cars.cars
-            //               .map((option) => DropdownMenuItem(
-            //                     value: option,
-            //                     child: Text(option.name),
-            //                   ))
-            //               .toList(),
-            //         ),
-            //       );
-            //     }),
+            HomeDropdownComponent(cars: cars),
             const SizedBox(height: 10),
             TextField(
               onChanged: (value) => controller.setDistanciaUrbana,

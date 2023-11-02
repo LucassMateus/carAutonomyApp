@@ -7,6 +7,7 @@ class CarModel {
   final String year;
   final double urbanConsum;
   final double highwayConsum;
+  
   CarModel({
     required this.name,
     required this.brand,
