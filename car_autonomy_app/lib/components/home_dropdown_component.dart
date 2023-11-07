@@ -1,6 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:car_autonomy_app/controllers/home_page_controller.dart';
 import 'package:flutter/material.dart';
+
 import '../models/car_model.dart';
 
 class HomeDropdownComponent extends StatelessWidget {

@@ -21,8 +21,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<CarStore>().fetchCars();
       context.read<CarRepository>().cars;
+      context.read<CarStore>().fetchCars();
     });
   }
 
@@ -55,19 +55,29 @@ class _HomePageState extends State<HomePage> {
             HomeDropdownComponent(cars: cars),
             const SizedBox(height: 10),
             TextField(
-              onChanged: (value) => controller.setDistanciaUrbana,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.number,
+              onChanged: controller.setDistanciaUrbana,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), labelText: 'Distância Urbana'),
             ),
             const SizedBox(height: 10),
             TextField(
-              onChanged: (value) => controller.setDistanciaRodoviaria,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.number,
+              onChanged: controller.setDistanciaRodoviaria,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Distância Rodoviária'),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(onPressed: () {}, child: const Text('Calcular')),
+            ValueListenableBuilder<bool>(
+                valueListenable: controller.btnAvailable,
+                builder: (context, value, _) {
+                  return ElevatedButton(
+                      onPressed: value ? () {} : null,
+                      child: const Text('Calcular'));
+                }),
             ValueListenableBuilder<String>(
                 valueListenable: controller.result,
                 builder: (context, value, _) {

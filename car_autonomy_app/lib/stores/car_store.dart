@@ -1,11 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:car_autonomy_app/services/car_service.dart';
 import 'package:car_autonomy_app/states/car_state.dart';
 import 'package:flutter/widgets.dart';
 
 class CarStore extends ValueNotifier<CarState> {
-  final carService = CarService();
+  final CarService carService;
 
-  CarStore() : super(InitialCarState());
+  CarStore(this.carService) : super(InitialCarState());
 
   fetchCars() async {
     value = LoadingCarState();

@@ -16,6 +16,13 @@ class HomePageController {
   ValueNotifier<String> get dropValue => _dropValue;
   ValueNotifier<String> get result => _result;
   ValueNotifier<CarModel>? get selectedCar => _selectedCar;
+  double get distanciaUrbana => _distanciaUrbana;
+  double get distanciaRodoviaria => _distanciaRodoviaria;
+  
+  ValueNotifier<bool> get btnAvailable =>
+      _distanciaUrbana > 0 && _distanciaRodoviaria > 0
+          ? ValueNotifier(true)
+          : ValueNotifier(false);
 
   void calcularConsumo() {
     final double consumo =

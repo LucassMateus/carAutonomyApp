@@ -5,7 +5,9 @@ import '../models/car_model.dart';
 import '../repositories/car_repository.dart';
 
 class CarService extends ChangeNotifier {
-  final repository = CarRepository();
+  final CarRepository repository;
+
+  CarService(this.repository);
 
   Future<List<CarModel>> fetchCars() async {
     final response = await repository.fetchCars();

@@ -4,7 +4,7 @@ import 'dart:convert';
 class CarModel {
   final String name;
   final String brand;
-  final String year;
+  final int year;
   final double urbanConsum;
   final double highwayConsum;
   
@@ -30,7 +30,7 @@ class CarModel {
     return CarModel(
       name: map['name'] as String,
       brand: map['brand'] as String,
-      year: map['year'] as String,
+      year: map['year'] as int,
       urbanConsum: map['urbanConsum'] as double,
       highwayConsum: map['highwayConsum'] as double,
     );

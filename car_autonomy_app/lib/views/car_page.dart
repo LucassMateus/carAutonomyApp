@@ -25,41 +25,55 @@ class _CarPageState extends State<CarPage> {
         child: Column(
           children: [
             TextField(
+              textInputAction: TextInputAction.next,
               onChanged: controller.setNome,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), labelText: 'Nome'),
             ),
             const SizedBox(height: 10),
             TextField(
+              textInputAction: TextInputAction.next,
               onChanged: controller.setMarca,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), labelText: 'Marca'),
             ),
             const SizedBox(height: 10),
             TextField(
+              textInputAction: TextInputAction.next,
               onChanged: controller.setAno,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), labelText: 'Ano'),
             ),
             const SizedBox(height: 10),
             TextField(
-              onChanged: (value) => controller.setConsumoUrbano,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.number,
+              onChanged: controller.setConsumoUrbano,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(), labelText: 'Consumo Urbano'),
             ),
             const SizedBox(height: 10),
             TextField(
-              onChanged: (value) => controller.setConsumoRodoviario,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.number,
+              onChanged: controller.setConsumoRodoviario,
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Consumo Rodoviario'),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-                onPressed: () {
-                  controller.saveCar();
-                },
-                child: const Text('Salvar'))
+            ValueListenableBuilder<bool>(
+              valueListenable: controller.btnAvailable,
+              builder: (context, value, _) {
+                return ElevatedButton(
+                    onPressed: true
+                        ? () {
+                            controller.saveCar();
+                          }
+                        : null,
+                    child: const Text('Salvar'));
+              },
+            )
           ],
         ),
       ),

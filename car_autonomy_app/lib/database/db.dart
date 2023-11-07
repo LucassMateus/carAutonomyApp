@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqlite3_flutter_libs/sqlite3_flutter_libs.dart';
 
 class DB {
   DB._();
@@ -18,8 +19,7 @@ class DB {
     if (Platform.isWindows || Platform.isLinux) {
       sqfliteFfiInit();
     }
-    databaseFactoryOrNull = databaseFactoryFfi;
-
+    databaseFactory = databaseFactory;
     var databasesPath = await getDatabasesPath();
     return await openDatabase(
       databasesPath,
@@ -35,7 +35,7 @@ class DB {
   String get _cars => 'CREATE TABLE cars '
       '(name TEXT PRIMARY KEY,'
       ' brand TEXT,'
-      ' year TEXT,'
+      ' year INTEGER,'
       ' urbanConsum REAL,'
       ' highwayConsum REAL'
       ')';

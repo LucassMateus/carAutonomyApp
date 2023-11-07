@@ -15,8 +15,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => CarRepository()),
-          ChangeNotifierProvider(create: (context) => CarService()),
-          ChangeNotifierProvider(create: (context) => CarStore()),
+          ChangeNotifierProvider(
+              create: (context) => CarService(context.read())),
+          ChangeNotifierProvider(create: (context) => CarStore(context.read())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
