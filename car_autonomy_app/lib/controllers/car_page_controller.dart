@@ -44,5 +44,6 @@ class CarPageController {
         urbanConsum: _consumoUrbano,
         highwayConsum: _consumoRodoviario);
     cars.insertCar(newCar!);
+    
   }
 }

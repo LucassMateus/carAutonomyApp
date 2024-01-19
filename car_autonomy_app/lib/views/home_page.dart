@@ -30,9 +30,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final controller = HomePageController();
     final store = context.watch<CarStore>();
-    final repository = context.watch<CarRepository>();
+    // final repository = context.watch<CarRepository>();
     final state = store.value;
-    final List<CarModel> cars = repository.cars;
+    // final List<CarModel> cars = repository.cars;
     Widget? child;
 
     if (state is LoadingCarState) {
@@ -52,7 +52,9 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
-            HomeDropdownComponent(cars: cars),
+            Consumer<CarRepository>(builder: (context, repository, child) {
+              return HomeDropdownComponent(cars: repository.cars);
+            }),
             const SizedBox(height: 10),
             TextField(
               textInputAction: TextInputAction.next,

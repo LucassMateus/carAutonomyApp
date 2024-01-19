@@ -16,10 +16,10 @@ class DB {
   }
 
   _initDataBase() async {
-    if (Platform.isWindows || Platform.isLinux) {
+    if (Platform.isAndroid || Platform.isIOS) {
       sqfliteFfiInit();
     }
-    databaseFactory = databaseFactory;
+    databaseFactory = databaseFactoryFfi;
     var databasesPath = await getDatabasesPath();
     return await openDatabase(
       databasesPath,
