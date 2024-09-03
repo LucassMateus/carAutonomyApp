@@ -1,5 +1,6 @@
 
-Car Autonomy App
+**Car Autonomy App**
+
 Este aplicativo Flutter foi desenvolvido para efetuar o cálculo de consumo de combustível de veiculos cadastrados de acordo com as informações fornecidas pelo usuário.
 
 Neste projeto utilizei uma arquitetura **MVVM** juntamente com o **Repository Pattern**. Desta forma, cada camada da arquitetura mantém suas responsabilidades bem divididas e a obtenção de dados para a aplicação protegida.
